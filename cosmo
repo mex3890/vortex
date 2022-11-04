@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+namespace Core\Cosmos;
+
+require realpath('vendor/autoload.php');
+
+use Core\Helpers\FileDirManager;
+use Dotenv\Dotenv;
+use Exception;
+use Symfony\Component\Console\Application;
+
+$env = Dotenv::createImmutable('./');
+$env->load();
+
+$cosmo = new Application();
+
+$files = FileDirManager::retrieveFilesByDirectory(__DIR__ . '/../vortex-framework/Core/Cosmo/Commands');
+
+if ($files !== [] && is_array($files)) {
+    foreach ($files as $filename) {
+        $command = substr($filename, 0, -4);
+        $command =  'Core\Cosmo\Commands\\' . $command;
+        $cosmo->add(new $command);
+    }
+}
+
+try {
+    $cosmo->run();
+} catch (Exception $e) {
+    echo $cosmo->areExceptionsCaught();
+    echo $e->getMessage();
+}
