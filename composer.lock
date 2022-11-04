@@ -1184,16 +1184,16 @@
         },
         {
             "name": "vortex-framework/vortex-framework",
-            "version": "1.0.3",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mex3890/vortex-framework.git",
-                "reference": "3f2c58b9f191617b2ada89bcb11c89dc3688e129"
+                "reference": "383fde4a4611d6c20b7b47c152d240df78b1d09b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mex3890/vortex-framework/zipball/3f2c58b9f191617b2ada89bcb11c89dc3688e129",
-                "reference": "3f2c58b9f191617b2ada89bcb11c89dc3688e129",
+                "url": "https://api.github.com/repos/mex3890/vortex-framework/zipball/383fde4a4611d6c20b7b47c152d240df78b1d09b",
+                "reference": "383fde4a4611d6c20b7b47c152d240df78b1d09b",
                 "shasum": ""
             },
             "require": {
@@ -1222,9 +1222,9 @@
             "description": "description",
             "support": {
                 "issues": "https://github.com/mex3890/vortex-framework/issues",
-                "source": "https://github.com/mex3890/vortex-framework/tree/1.0.3"
+                "source": "https://github.com/mex3890/vortex-framework/tree/1.0.0"
             },
-            "time": "2022-11-04T18:17:21+00:00"
+            "time": "2022-11-04T20:58:42+00:00"
         }
     ],
     "packages-dev": [],
