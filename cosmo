@@ -15,7 +15,7 @@ $env->load();
 
 $cosmo = new Application();
 
-$files = FileDirManager::retrieveFilesByDirectory(__DIR__ . '/../vortex-framework/Core/Cosmo/Commands');
+$files = FileDirManager::retrieveFilesByDirectory(__DIR__ . '/vendor/vortex-framework/vortex-framework/Core/Cosmo/Commands');
 
 if ($files !== [] && is_array($files)) {
     foreach ($files as $filename) {
