@@ -4,7 +4,7 @@ use Dotenv\Dotenv;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-require '../vendor/vortex-framework/vortex-framework/Core/Core/global_functions.php';
+require_once '../vendor/vortex-framework/vortex-framework/Core/Core/global_functions.php';
 
 $env = Dotenv::createImmutable(__DIR__ . '/../');
 $env->load();
