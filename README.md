@@ -10,13 +10,55 @@
 <p align="center">
 <a href="https://github.com/mex3890/vortex/"><img src="https://badgen.net/badge/Support/mail/purple" alt=""></a>
 <a href="https://github.com/mex3890/vortex/"><img src="https://badgen.net/badge/icon/discord/black?icon=discord&label" alt=""></a><br>
-<a href="https://github.com/mex3890/vortex/"><img src="https://badgen.net/badge/Lts/1.0.0/cyan" alt=""></a>
+<a href="https://github.com/mex3890/vortex/"><img src="https://badgen.net/badge/Lts/1.0.3/cyan" alt=""></a>
 <a href="https://getcomposer.org/"><img src="https://badgen.net/badge/Composer/v2.4/orange" alt=""></a>
 <a href="https://www.php.net/"><img src="https://badgen.net/badge/icon/v8.1?icon=php&label" alt=""></a>
 <a href="https://github.com/mex3890/vortex/pulse/monthly"><img src="https://badgen.net/badge/icon/insights/green?icon=github&label" alt=""></a>
 <a href="https://github.com/mex3890/vortex/"><img src="https://badgen.net/badge/icon/v8.19/red?icon=npm&label" alt=""></a>
 </p>
 <hr>
+
+`Installation`
+
+- On terminal run the composer command with your new project name
+
+```shell
+composer create-project vortex-framework/vortex YOUR_PROJECT_NAME
+```
+
+- Copy the .env.example and rename to .env
+- **Set the variables** to continue the installation
+
+```dotenv
+APP_NAME=$PROJECT_NAME
+APP_ENV=local
+APP_URL=$PROJECT_URL
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=$DATABASE_NAME
+DB_USERNAME=$DATABASE_USERNAME
+DB_PASSWORD=$DATABASE_PASSWORD
+DB_CHARSET=utf8mb4
+```
+
+- on terminal go to your root project dir and run Cosmo Vortex Installation command
+```shell
+php cosmo vortex:install
+```
+
+- Your output should be equal to this
+- [x] load environment...........    SUCCESS<br>
+- [x] first migrations...............    SUCCESS<br>
+- [x] set time zone.................    SUCCESS
+
+- To test your project run:
+```shell
+php cosmo migrate
+php cosmo seed
+```
+- That create a User default table and create one User
 
 `Routes with static files`
 
