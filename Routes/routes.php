@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\UserController;
 use Core\Helpers\Uri;
 use Core\Routes\Route;
 
@@ -19,6 +20,12 @@ $route->get('/', function () {
         'youtube_icon' => Uri::getPublicPath('img/icons/youtube.png'),
     ]);
 });
+
+$route->get('/login', function () {
+    view('login.galaxy.tpl');
+});
+
+$route->post('/login', [UserController::class, 'create']);
 
 $route->default('/404', function () {
     view('404.galaxy.tpl', [
