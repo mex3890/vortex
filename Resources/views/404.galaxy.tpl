@@ -4,12 +4,13 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="{content('favicon.ico')}">
         <title>404 - Route Not Found</title>
     </head>
     <body>
         <main>
             <div id="vortex-logo">
-                <img src="{{$vortex_logo_url}}" alt="">
+                <img src="{content('img/vortex.png')}" alt="">
             </div>
             <div id="text-content">
                 <h1>404</h1>
