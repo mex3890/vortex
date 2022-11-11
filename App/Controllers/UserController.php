@@ -42,6 +42,12 @@ class UserController extends Controller
 
     public static function create(Request $request)
     {
+        foreach ($request->files() as $file){
+            echo '<pre>';
+            var_dump($file['type']);
+            echo '</pre>';
+        }
+        die();
         Validation::check($request->attributes(), self::$rules, self::$feedback);
         $attributes = $request->attributes();
 
