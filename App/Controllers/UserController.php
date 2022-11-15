@@ -2,13 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Services\CreateUser;
+use App\Services\VerifyUser;
 use Core\Abstractions\Controller;
-use Core\Helpers\Hash;
-use Core\Helpers\Uri;
 use Core\Request\Request;
 use Core\Request\Validation;
-use SmartyException;
+use JetBrains\PhpStorm\NoReturn;
 
 class UserController extends Controller
 {
@@ -19,7 +17,13 @@ class UserController extends Controller
         ],
         'password' => [
             'required',
-            ['string', 10, 50]
+            ['string', 5, 50],
+            ['password', [
+                'number',
+                'upper-case',
+                'lower-case',
+                'special-character'
+            ]]
         ]
     ];
 
@@ -31,42 +35,23 @@ class UserController extends Controller
         'password' => [
             'required' => 'The password is required',
             'string.min' => 'Minimum characters is 10',
-            'string.max' => 'Maximum characters is 50'
+            'string.max' => 'Maximum characters is 50',
+            'password.upper-case' => 'Need upper case character',
+            'password.lower-case' => 'Need lower case',
+            'password.number' => 'Need number',
+            'password.special-character' => 'Need special character',
         ]
     ];
 
-    public static function index()
-    {
-
-    }
-
-    public static function create(Request $request)
+    #[NoReturn] public static function login(Request $request): void
     {
         Validation::check($request->attributes(), self::$rules, self::$feedback);
         $attributes = $request->attributes();
 
-        $user = new CreateUser($attributes['email'], Hash::hashPassword($attributes['password']));
+        if (VerifyUser::verifyUserByCredentials($attributes['email'], $attributes['password'])) {
+            redirect('/');
+        }
 
-        redirect('/');
-    }
-
-    public static function delete()
-    {
-
-    }
-
-    public static function show()
-    {
-
-    }
-
-    public static function edit()
-    {
-
-    }
-
-    public static function update()
-    {
-
+        redirect('/404');
     }
 }

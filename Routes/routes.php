@@ -14,7 +14,7 @@ $route->get('/login', function () {
     view('login.galaxy.tpl', ['home_url' => Uri::getRootPath()]);
 });
 
-$route->post('/login', [UserController::class, 'create']);
+$route->post('/login', [UserController::class, 'login']);
 
 $route->default('/404', function () {
     view('404.galaxy.tpl', ['home_url' => Uri::getRootPath()]);
