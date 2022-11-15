@@ -21,13 +21,6 @@
         <label>
             <input name="password" type="password" value="{old('password')}" placeholder="Password">
         </label>
-
-        <label>
-            <p>
-                <label>Add file (single): </label><br/>
-                <input type="file" name="image"/>
-            </p>
-        </label>
         <button type="submit">SUBMIT</button>
     </form>
 </main>

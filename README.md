@@ -18,6 +18,142 @@
 </p>
 <hr>
 
+## Validations
+
+`The validation Class`
+
+You can use the Validation class to validate your requests, to choose the validations of each field you must pass an
+array containing the respective rules as in the example below
+
+```php
+Validation::check($attributes, $rules, $feedback);
+```
+
+| PARAMETER    | TYPE  | DESCRIPTION                                            | DEFAULT |
+|--------------|:-----:|--------------------------------------------------------|:-------:|
+| $attributes  | array | The array with the data to be validated                |    X    |
+| $rules       | array | The array containing the rules to be used to validated |    X    |
+| $feedback    | array | An array with the responses for invalid cases          |    X    |
+
+One example of an application of the validation method
+
+````php
+$rules = [
+    'email' => [
+        'required',
+        'email'
+    ],
+    'password' => [
+        'required',
+        ['string', 10, 50],
+        ['password', ['upper-case', 'special-character']]
+];
+
+$feedback = [
+     'email' => [
+        'required' => 'The email is required',
+        'email' => 'Enter with a valid email'
+     ],
+     'password' => [
+        'required' => 'The password is required',
+        'string' => 'The password must be a string',
+        'string.min' => 'Minimum characters is 10',
+        'string.max' => 'Maximum characters is 50',
+        'password.upper-case' => 'Need upper case character',
+        'password.special-character' => 'Need special character'
+     ]
+]
+
+public static function login(Request $request): void
+    {
+        Validation::check($request->attributes(), self::$rules, self::$feedback);
+        $attributes = $request->attributes();
+
+        $verifyServer = new VerifyUser($attributes['email'], $attributes['password']);
+        $verify_password = $verifyServer->verifyUserByEmail();
+
+        if ($verifyServer->verifyUserByEmail()) {
+            redirect('/');
+        }
+
+        redirect('/404');
+    }
+````
+
+### List of available validation rules
+
+`bool`
+- **Description** - Simple validation to **bool** attributes
+- **Usage** - `'bool'` 
+- **Parameters** - **Don't** use parameters
+
+`boolean`
+- **Description** - Simple validation to **boolean** attributes
+- **Usage** - `'boolean'`
+- **Parameters** - **Don't** use parameters
+
+`date`
+- **Description** - An validation for **date** attributes
+- **Usage** - `'date'`, `['date', 'Y-m-d']`
+- **Parameters** - `format`, you can set the format for validation, the default format is set in `.env` like `DATE_FORMAT=Y-m-d`
+
+`date_time`
+- **Description** - Simple validation for **date-time**
+- **Usage** - `'bool'`
+- **Parameters** - `format`, you can set the format for validation, 
+the default format is set in `.env` from merge `DATE_FORMAT=Y-m-d` and `TIME_FORMAT=H:i:s`
+
+`email`
+- **Description** - Simple validation for **email** attributes
+- **Usage** - `'email'`
+- **Parameters** - **Don't** use parameters
+
+`file`
+- **Description** - Complete validation for **file** attributes
+- **Usage** - `'file'`, `['file', ['pdf', 'php', 'html']]`, `['file', ['pdf', 'php', 'html'], 1000]`
+- **Parameters** - `extensions`, `max size limit`, all parameters are optional
+
+`float`
+- **Description** - Simple validation for **float** attributes
+- **Usage** - `'float'`, `['float', -100]`, `['float', 10, 100.7]`
+- **Parameters** - `min`, `max`, all parameters are optional
+
+`image`
+- **Description** - Complete validation for **image** attributes
+- **Usage** - `'image'`, `['image', ['png', 'jpeg']]`, `['image', ['png'], 1000]`
+- **Parameters** - `extensions`, `max size limit`, all parameters are optional
+
+`int`
+- **Description** - Simple validation for **int** attributes
+- **Usage** - `'int'`, `['int', -100]`, `['int', 10, 1000]`
+- **Parameters** - `min`, `max`, all parameters are optional
+
+`password`
+- **Description** - Complete validation for **password** attributes
+- **Usage** - `['password', ['number', 'upper-case', 'lower-case', 'special-character']]`
+- **Parameters** - **array filters**, you can set the required constraints in this list
+- `number` `upper-case` `lower-case` `special-character`
+
+`required`
+- **Description** - Simple validation for **required** attributes
+- **Usage** - `'required'`
+- **Parameters** - **Don't** use parameters
+
+`string`
+- **Description** - Simple validation for **string** attributes
+- **Usage** - `'string'`, `['string', 30]`, `['string', 10, 200]`
+- **Parameters** - `min`, `max`, all parameters are optional
+
+`time`
+- **Description** - An validation for **time** attributes
+- **Usage** - `'time'`, `['time', 'H:i:s']`
+- **Parameters** - `format`, you can set the format for validation, the default format is set in `.env` like `TIME_FORMAT=H:i:s`
+
+`url`
+- **Description** - Simple validation for **url** attributes
+- **Usage** - `'url'`
+- **Parameters** - **Don't** use parameters
+
 `Installation`
 
 - On terminal run the composer command with your new project name
@@ -44,20 +180,23 @@ DB_CHARSET=utf8mb4
 ```
 
 - on terminal go to your root project dir and run Cosmo Vortex Installation command
+
 ```shell
 php cosmo vortex:install
 ```
 
 - Your output should be equal to this
-- [x] load environment...........    SUCCESS<br>
-- [x] first migrations...............    SUCCESS<br>
-- [x] set time zone.................    SUCCESS
+- [x] load environment........... SUCCESS<br>
+- [x] first migrations............... SUCCESS<br>
+- [x] set time zone................. SUCCESS
 
 - To test your project run:
+
 ```shell
 php cosmo migrate
 php cosmo seed
 ```
+
 - That create a User default table and create one User
 
 `Routes with static files`
@@ -87,12 +226,14 @@ $route->get('/', function () use ($galaxy) {
     $galaxy->render('template_path', ['var' => $var]);
 });
 ```
+
 <hr>
 <p>Make comments</p>
 
 ````html
 <h1>{*New comment are here*}</h1>
 ````
+
 <hr>
 <br>
 
@@ -112,6 +253,7 @@ class Migrate extends Command
     }
 }
 ```
+
 <br>
 <h5><b> /|\ Start</b></h5>
 
@@ -130,6 +272,7 @@ $cosmos->start( $with_time, $with_change_counter ): void
 | $output               | OutputInterface | Pass the output to write to the terminal                                |     X      |
 | $width_time           |      bool       | Set whether the build time will be shown at the end of the command      |   false    |
 | $width_change_counter |      bool       | Set whether the success counter will be shown at the end of the command |   false    |
+
 <br>
 
 <h5><b> /|\ Title</b></h5>
@@ -146,6 +289,7 @@ $cosmos->title( $main_title, $secondary_title ): void
 |-----------------------|:------:|------------------------------------------------------------|:-------:|
 | $main_title           | string | Set the first string to be show on the command line title  |    X    |
 | $secondary_title      | string | Set the second string to be show on the command line title |    X    |
+
 <br>
 
 <h5><b> /|\ IndexRow</b></h5>
@@ -162,6 +306,7 @@ $cosmos->indexRow( $first_index, $second_index ): void
 |---------------|:------:|------------------------------------------------------------|:-------:|
 | $first_index  | string | Set the first string to be show on the command line index  |    X    |
 | $second_index | string | Set the second string to be show on the command line index |    X    |
+
 <br>
 
 <h5><b> /|\ FileSuccessRow</b></h5>
@@ -178,6 +323,7 @@ $cosmos->fileSuccessRow( $filename,  $status ): void
 |-----------|:------:|----------------------------------------------------------------------|:-------:|
 | $filename | string | Set the filename that will appear at the start of the row on success |    X    |
 | $status   | string | defines the status that will appear at the end of the row on success |    X    |
+
 <br>
 
 <h5><b> /|\ FileFailRow</b></h5>
@@ -194,6 +340,7 @@ $cosmos->fileFailRow( $filename,  $status ): void
 |-----------|:------:|-------------------------------------------------------------------|:-------:|
 | $filename | string | Set the filename that will appear at the start of the row on fail |    X    |
 | $status   | string | defines the status that will appear at the end of the row on fail |    X    |
+
 <br>
 
 <h5><b> /|\ Finish</b></h5>
@@ -219,6 +366,7 @@ $cosmos->commandSuccess( $main_title ): void
 | PARAMETER |  TYPE  | DESCRIPTION                                                      | DEFAULT |
 |-----------|:------:|------------------------------------------------------------------|:-------:|
 | $filename | string | Set the string to be show on the command line title with success |    X    |
+
 <br>
 
 
