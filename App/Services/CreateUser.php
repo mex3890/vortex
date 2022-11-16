@@ -8,22 +8,20 @@ use Core\Helpers\DateTime;
 
 class CreateUser extends Service
 {
-    public function __construct(string $email, string $password)
+    public function __construct(string $name, string $email, string $password)
     {
-        $this->createUser($email, $password);
+        $this->createUser($name, $email, $password);
     }
 
-    private function createUser(string $email, string $password)
+    private function createUser(string $name, string $email, string $password): bool
     {
         $user = new User([
+            'name' => $name,
             'email' => $email,
             'password' => $password,
             'created_at' => DateTime::currentDateTime()
         ]);
-        try {
-            return $user->create();
-        } catch (\Exception $exception) {
-            return 'Cant create';
-        }
+
+        return $user->create();
     }
 }
