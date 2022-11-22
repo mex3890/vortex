@@ -8,12 +8,7 @@ use Core\Helpers\DateTime;
 
 class CreateUser extends Service
 {
-    public function __construct(string $name, string $email, string $password)
-    {
-        $this->createUser($name, $email, $password);
-    }
-
-    private function createUser(string $name, string $email, string $password): bool
+    public static function make(string $name, string $email, string $password): bool|User
     {
         $user = new User([
             'name' => $name,
@@ -22,6 +17,12 @@ class CreateUser extends Service
             'created_at' => DateTime::currentDateTime()
         ]);
 
-        return $user->create();
+        try {
+            $user = $user->create();
+        } catch (\Exception) {
+            return false;
+        }
+
+        return $user;
     }
 }

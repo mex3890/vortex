@@ -24,21 +24,18 @@
             {foreach from=error() item=errors}
                 {foreach from=$errors item=error}
                     <span>
-                    {$error}<br>
-                </span>
+                        {$error}<br>
+                    </span>
                 {/foreach}
             {/foreach}
         </div>
     {/if}
 
     <script>
-        let messages = document.getElementsByClassName('error-message')
+        let message = document.querySelector('.error-message')
 
         setTimeout(function () {
-            messages[0].classList.add('disable')
-            messages[1].classList.add('disable')
+            message.classList.add('disable')
         }, 6000)
-
-
     </script>
 {/block}
