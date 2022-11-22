@@ -14,6 +14,7 @@ final class CreateUsersTable extends Migration
     {
         Schema::create(self::USERS_TABLE, $table = new DbTable(), function () use (&$table) {
             $table->id()->unique()->notNull()->autoIncrement();
+            $table->varchar('name', '255')->notNull();
             $table->varchar('email', 255)->unique()->notNull();
             $table->varchar('password', 255)->notNull();
             $table->timeStamp('created_at');

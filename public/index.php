@@ -12,4 +12,3 @@ $env->load();
 date_default_timezone_set($_ENV['TIME_ZONE']);
 
 require __DIR__ . '/../Routes/routes.php';
-
