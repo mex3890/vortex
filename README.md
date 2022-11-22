@@ -73,10 +73,10 @@ public static function login(Request $request): void
         $verify_password = $verifyServer->verifyUserByEmail();
 
         if ($verifyServer->verifyUserByEmail()) {
-            redirect('/');
+            redirect('/home');
         }
 
-        redirect('/404');
+        redirect('/');
     }
 ````
 
@@ -148,6 +148,11 @@ the default format is set in `.env` from merge `DATE_FORMAT=Y-m-d` and `TIME_FOR
 - **Description** - An validation for **time** attributes
 - **Usage** - `'time'`, `['time', 'H:i:s']`
 - **Parameters** - `format`, you can set the format for validation, the default format is set in `.env` like `TIME_FORMAT=H:i:s`
+
+`unique`
+- **Description** - Validation for **unique** attributes
+- **Usage** - `['unique', 'users', 'email']`
+- **Parameters** - `table`, `column`, you need pass the table and column name for validate if the attribute is unique
 
 `url`
 - **Description** - Simple validation for **url** attributes
