@@ -2,14 +2,18 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\FailedSendEmail;
+use App\Models\User;
 use App\Services\CreateUser;
+use App\Services\SendRegisterEmail;
 use App\Services\VerifyUser;
 use Core\Abstractions\Controller;
 use Core\Helpers\Hash;
 use Core\Request\Request;
-use Core\Request\Session;
 use Core\Request\Validation;
 use JetBrains\PhpStorm\NoReturn;
+use PHPMailer\PHPMailer\Exception;
+use SmartyException;
 
 class UserController extends Controller
 {
@@ -66,22 +70,38 @@ class UserController extends Controller
         back(null, ['Login' => "Credentials don't correspond to any account"]);
     }
 
-    #[NoReturn] public static function register(Request $request)
+    /**
+     * @throws Exception
+     * @throws FailedSendEmail
+     */
+    public static function register(Request $request)
     {
         Validation::check($request->attributes(), self::$rules, self::$feedback);
 
         $attributes = $request->attributes();
 
-        $user = new CreateUser(
+        $user = CreateUser::make(
             $attributes['name'],
             $attributes['email'],
             Hash::hashPassword($attributes['password'])
         );
 
-        if (!empty($user)) {
+        if ($user instanceof User) {
+            SendRegisterEmail::send($user);
+
             redirect('/');
         }
 
         redirect('/404');
+    }
+
+    /**
+     * @throws SmartyException
+     */
+    public static function index()
+    {
+        $users = User::find()->pagination(2)->get();
+
+        view('index.galaxy.tpl', ['users' => $users]);
     }
 }
