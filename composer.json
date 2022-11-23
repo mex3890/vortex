@@ -14,8 +14,6 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "fzaninotto/faker": "1.9.x-dev",
-        "monolog/monolog": "3.x-dev",
         "vortex-framework/vortex-framework": "^1.1"
     }
 }
