@@ -24,6 +24,10 @@ $route->post('/register', [UserController::class, 'register']);
 
 $route->post('/login', [UserController::class, 'login']);
 
+$route->get('/user/$id', [UserController::class, 'show']);
+
+$route->post('/user/$id', function ($id) {
+});
 
 $route->default('/404', function () {
     view('404.galaxy.tpl', ['home_url' => Uri::getRootPath()]);
