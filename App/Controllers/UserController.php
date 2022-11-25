@@ -8,6 +8,7 @@ use App\Services\CreateUser;
 use App\Services\SendRegisterEmail;
 use App\Services\VerifyUser;
 use Core\Abstractions\Controller;
+use Core\Exceptions\ViolationMinimalPagesBeforeBreakLinksList;
 use Core\Helpers\Hash;
 use Core\Request\Request;
 use Core\Request\Validation;
@@ -96,12 +97,26 @@ class UserController extends Controller
     }
 
     /**
+     * @return void
      * @throws SmartyException
+     * @throws ViolationMinimalPagesBeforeBreakLinksList
      */
-    public static function index()
+    public static function index(): void
     {
         $users = User::find()->pagination(2)->get();
 
         view('index.galaxy.tpl', ['users' => $users]);
+    }
+
+    /**
+     * @throws SmartyException
+     */
+    public static function show(Request $request)
+    {
+        $user_id = $request->parameters()['id'];
+
+        $user = User::find('*', 'id', $user_id)->get();
+
+        view('user/show.galaxy.tpl', ['user' => $user]);
     }
 }

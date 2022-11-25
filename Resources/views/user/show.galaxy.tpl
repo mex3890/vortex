@@ -1,26 +1,20 @@
 {extends file="layouts/main.galaxy.tpl"}
-{block name=title}Register{/block}
+{block name=title}Login{/block}
 {block name=main_content}
-    <main id="register">
+    <main id="login">
         <div class="default-form">
-            <a href="{$home_url}">
+            <a href="#">
                 <img id="vortex_logo" src="{content('img/vortex.png')}" alt="">
             </a>
-            <form method="post" action="/register" enctype="multipart/form-data">
+            <form method="post" action="/user/{$user->id}">
                 {csrf()}
                 <label>
-                    <input name="name" type="text" value="{old('name')}" placeholder="Name">
+                    <input name="name" type="text" value="{$user->name}" placeholder="Name">
                 </label>
-
                 <label>
-                    <input name="email" type="email" value="{old('email')}" placeholder="Email">
+                    <input name="email" type="email" value="{$user->email}" placeholder="Email">
                 </label>
-
-                <label>
-                    <input name="password" type="password" value="{old('password')}" placeholder="Password">
-                </label>
-                <input name="vortex_redirect" type="hidden" value="{$smarty.get.LAST_ROUTE}">
-                <button type="submit">REGISTER</button>
+                <button type="submit">UPDATE</button>
             </form>
         </div>
     </main>
@@ -37,7 +31,7 @@
     {/if}
 
     <script>
-        const message = document.querySelector('.error-message')
+        let message = document.querySelector('.error-message')
 
         setTimeout(function () {
             message.classList.add('disable')

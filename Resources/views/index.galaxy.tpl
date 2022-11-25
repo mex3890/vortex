@@ -1,5 +1,5 @@
 {extends file="layouts/main.galaxy.tpl"}
-{block name=title}Register{/block}
+{block name=title}Users list{/block}
 {block name=main_content}
     <div id="cards-list">
         {foreach from=$users item=user}

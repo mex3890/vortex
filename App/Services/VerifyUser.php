@@ -10,7 +10,7 @@ class VerifyUser extends Service
 {
     public static function verifyUserByCredentials(string $email, string $password): bool
     {
-        $user = User::get('*', 'email', $email);
+        $user = User::find('*', 'email', $email)->get();
 
         if ($user) {
             return Hash::verifyPassword($password, $user->password);

@@ -9,6 +9,6 @@ class UserSeeder extends Seeder
 {
     public static function handler(): void
     {
-        self::factory('users', UserFactory::class, 10);
+        self::factory('users', UserFactory::class, 100);
     }
 }
