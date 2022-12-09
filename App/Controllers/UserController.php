@@ -103,7 +103,7 @@ class UserController extends Controller
      */
     public static function index(): void
     {
-        $users = User::find()->pagination(2)->get();
+        $users = User::find()->pagination(10);
 
         view('index.galaxy.tpl', ['users' => $users]);
     }
@@ -115,7 +115,7 @@ class UserController extends Controller
     {
         $user_id = $request->parameters()['id'];
 
-        $user = User::find('*', 'id', $user_id)->get();
+        $user = User::find()->where('id', $user_id)->get();
 
         view('user/show.galaxy.tpl', ['user' => $user]);
     }

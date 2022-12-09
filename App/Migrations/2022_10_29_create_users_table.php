@@ -3,7 +3,7 @@
 namespace App\Migrations;
 
 use Core\Abstractions\Migration;
-use Core\Database\DbTable;
+use Core\Database\Query\TableBuilder;
 use Core\Database\Schema;
 
 final class CreateUsersTable extends Migration
@@ -12,19 +12,19 @@ final class CreateUsersTable extends Migration
 
     public static function up(): void
     {
-        Schema::create(self::USERS_TABLE, $table = new DbTable(), function () use (&$table) {
+        Schema::create(self::USERS_TABLE, function (TableBuilder $table) {
             $table->id()->unique()->notNull()->autoIncrement();
             $table->varchar('name', '255')->notNull();
             $table->varchar('email', 255)->unique()->notNull();
             $table->varchar('password', 255)->notNull();
             $table->timeStamp('created_at');
             $table->timeStamp('updated_at');
-            return $table->columns;
+            return $table;
         });
     }
 
     public static function down(): void
     {
-        Schema::dropIfExists(self::USERS_TABLE);
+        Schema::drop(self::USERS_TABLE);
     }
 }

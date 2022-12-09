@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use Core\Abstractions\Service;
 use Core\Helpers\DateTime;
+use Exception;
 
 class CreateUser extends Service
 {
@@ -19,7 +20,7 @@ class CreateUser extends Service
 
         try {
             $user = $user->create();
-        } catch (\Exception) {
+        } catch (Exception) {
             return false;
         }
 
