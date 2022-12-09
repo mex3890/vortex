@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96c494df796c5584785b6a5853f801f1",
+    "content-hash": "ab39f0c9923f2922b6ac9f14942afee4",
     "packages": [
         {
             "name": "fzaninotto/faker",
@@ -1393,16 +1393,16 @@
         },
         {
             "name": "vortex-framework/vortex-framework",
-            "version": "1.1.10",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mex3890/vortex-framework.git",
-                "reference": "1d63e1c6251745b95ba04cf705a33895e3657694"
+                "reference": "178c51dcac918f2dcc9cd539a0a0382ee25c516c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mex3890/vortex-framework/zipball/1d63e1c6251745b95ba04cf705a33895e3657694",
-                "reference": "1d63e1c6251745b95ba04cf705a33895e3657694",
+                "url": "https://api.github.com/repos/mex3890/vortex-framework/zipball/178c51dcac918f2dcc9cd539a0a0382ee25c516c",
+                "reference": "178c51dcac918f2dcc9cd539a0a0382ee25c516c",
                 "shasum": ""
             },
             "require": {
@@ -1433,9 +1433,9 @@
             "description": "description",
             "support": {
                 "issues": "https://github.com/mex3890/vortex-framework/issues",
-                "source": "https://github.com/mex3890/vortex-framework/tree/1.1.10"
+                "source": "https://github.com/mex3890/vortex-framework/tree/2.0.4"
             },
-            "time": "2022-11-25T20:08:19+00:00"
+            "time": "2022-12-08T23:27:39+00:00"
         }
     ],
     "packages-dev": [],

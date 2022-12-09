@@ -20,5 +20,5 @@
         {/foreach}
 
     </div>
-    {getPaginationLinks($users)}
+    {getPaginationLinks()}
 {/block}
